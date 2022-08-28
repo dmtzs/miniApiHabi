@@ -26,6 +26,8 @@ jobs:
         filters: |
           api:
             - 'src/**.py'
+            - 'src/controller/**.py'
+            - 'src/queries/**.py'
     
     # run only if 'api' files were changed
     - name: workflow tests

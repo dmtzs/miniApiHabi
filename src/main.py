@@ -14,6 +14,6 @@ if __name__ == "__main__":
             httpd.serve_forever()
     except KeyboardInterrupt:
         print("Stopping by Ctrl+C")
-        httpd.server_close()  # to solve problem "OSError: [Errno 98] Address already in use"
+        httpd.server_close()  # To solve problem "OSError: [Errno 98] Address already in use"
     except Exception as ex:
         print(f"The following error ocurred: {ex}")
