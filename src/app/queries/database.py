@@ -46,11 +46,11 @@ class MySql():
                         sql += " WHERE "
 
                         for i, key in enumerate(keys):
-                            filter = f"{key}='{params[key]}'"
+                            my_filter = f"{key}='{params[key]}'"
                             if len(keys) > 1 and i < len(keys)-1:
-                                sql += filter + " AND "
+                                sql += my_filter + " AND "
                             else:
-                                sql += filter
+                                sql += my_filter
 
                     cursor.execute(sql)
                     result = cursor.fetchall()

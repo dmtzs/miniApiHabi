@@ -26,6 +26,7 @@
 # NOTA
 He notado que a veces la conexión a la bd se tarda de más y se da un timeout, no se a que se deba eso pero de igual manera me pasaba si intentaba conectarme con dbeaver cuando estaba analizando las tablas que hay creadas.
 
+# Ejercicio 1
 ## Explicación de lo que se realizará
 Una prueba que debe ser realizada con la creación de una pequeña API sin usar un framework de python o algún otro, de igual manera sin usar ORMs por lo que se deberán usar bibliotecas en las que se pueda crear el query escrito.
 Esto es con el propósito de conocer la manera en la que genero los queries en la notación de SQL.
@@ -185,7 +186,7 @@ Así mismo se puede filtrar por cualquiera de esos parámetros de forma individu
 Finalmente como parte de este ejercicio si desean probar por ejemplo usando postman les dejo el archivo json para que puedan importar la colección que usé para probar mi API: [click aqui](./tuhabi.postman_collection.json)
 
 
-## Requisito opcional 2 de usuario pueda dar me gusta a propiedades
+# Ejercicio 2 de usuario pueda dar me gusta a propiedades
 Considero que para hacer esto posible lo que se debe de hacer es crear una tabla con un nombre descriptivo como podría ser `liked_properties` tal vez, en donde se deben guardar 2 llaves foraneas que serían el `id` de la tabla `auth_user` que se guardaría como `id_user` dentro de la nueva tabla, el `id` de la tabla `property` que serçia guardado en la nueva tabla tal vez como `id_property` y un timestamp como para saber en caso de que sea necesario cuando el usuario le dio `like` a esa tabla. Debido a que veo que en algunos campos de fecha se pone por ejemplo en la tabla de `auth_user` un campo como `date_joined` yo creare mi campo de date para la tabla de propiedades con me gusta un campo llamado `date_liked`. Los comandos para crear esa tabla sería:
 
 Primero insertamos la tabla, los int 11 es porque veo que el id de las tablas de la bd de tuhabi dicen que son int 11 y por eso los coloco de igual manera así:
