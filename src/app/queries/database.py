@@ -1,25 +1,17 @@
 try:
     import pymysql
-    from app import logger
+    from app import logger, db_credentials
 except ImportError as eImp:
     print(f"The following import error ocurred in {__file__}: {eImp}")
 
 class MySql():
-    db_credentials = {
-        "username": "pruebas",
-        "passwd": "VGbt3Day5R",
-        "dbName": "habi_db",
-        "port": 3309,
-        "host": "3.130.126.210"
-        }
-
     def db_connection(self):
         try:
-            connection = pymysql.connect(host=self.db_credentials["host"],
-                                            port=self.db_credentials["port"],
-                                            user=self.db_credentials["username"],
-                                            password=self.db_credentials["passwd"],
-                                            database=self.db_credentials["dbName"],
+            connection = pymysql.connect(host=db_credentials["host"],
+                                            port=db_credentials["port"],
+                                            user=db_credentials["username"],
+                                            password=db_credentials["passwd"],
+                                            database=db_credentials["db_name"],
                                             cursorclass=pymysql.cursors.DictCursor)
             logger.info("Username and password successfully decoded from basic auth")
             return connection
@@ -40,12 +32,26 @@ class MySql():
         try:
             with connection:
                 with connection.cursor() as cursor:
-                    sql = ""
-                    if len(params) == 1:
-                        sql = "SELECT address, city, username FROM auth_user WHERE username=eder"
-                    else:
-                        # Hacer algo aquí en caso de que se reciban más de un param
-                        pass
+                    sql = """
+                    SELECT address, city, price, description, status FROM 
+                    (SELECT Pty.address, Pty.city, Pty.price, Pty.description, Pty.year, S.name AS status
+                    FROM property Pty
+                    LEFT JOIN status_history SH ON P.id=SH.property_id
+                    LEFT JOIN status S ON SH.status_id=S.id
+                    WHERE (S.name='pre_venta' OR S.name='vendido' OR S.name='en_venta')) res 
+                    """
+
+                    keys = list(params.keys())
+                    if len(keys) != 0:
+                        sql += " WHERE "
+
+                        for i, key in enumerate(keys):
+                            filter = f"{key}='{params[key]}'"
+                            if len(keys) > 1 and i < len(keys)-1:
+                                sql += filter + " AND "
+                            else:
+                                sql += filter
+
                     cursor.execute(sql)
                     result = cursor.fetchall()
                     if len(result) == 0:

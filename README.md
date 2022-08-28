@@ -18,6 +18,11 @@
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/dmtzs/miniApiHabi">
 </p>
 
+- [Documentation](#Documentation)
+- [Supported versions for releases](#Supported-versions-for-releases)
+- [API](#API)
+  - [Specifications](#Specifications)
+
 # NOTA
 He notado que a veces la conexión a la bd se tarda de más y se da un timeout, no se a que se deba eso pero de igual manera me pasaba si intentaba conectarme con dbeaver cuando estaba analizando las tablas que hay creadas.
 
@@ -38,7 +43,7 @@ Aquí por las limitaciones decidí ser mas efectivo que eficiente, por qué?. Ne
 
 De igual manera agregaré un método de autenticación al API que será usando basic auth solo por agregar una capa más de seguridad usando como base usuarios de la tabla de `auth_user`.
 
-NOTA: De igual manera como he optado por ser mas eficaz, cabe mencionar que en la parte de cargar las credenciales para poder conectarnos de manera exitosa a la base de datos debe de ser tal vez obteniendolas de un archivo con las credenciales o en mi muy personal opinión desde secrets manager de AWS por mencionar un ejemplo aunque hay varias formas de guardar las credenciales de base de datos de manera segura. Por el momento para cumplir con el objetivo principal del ejercicio he optado por ponerlas en el código para poder hacer la conexión a la bd. Sin embargo esto NO debe ser así en ambientes reales y mucho menos en producción.
+NOTA: De igual manera como he optado por ser mas eficaz, cabe mencionar que en la parte de cargar las credenciales para poder conectarnos de manera exitosa a la base de datos debe de ser tal vez obteniendolas de un secrets manager, pero en este caso las pondremos un archivo codificadas en base 64.
 
 De igual manera tal vez se pueda notar que no se sigue un patrón como tal definido por algún estándar, esto porque me concentré más en ver cómo usar la biblioteca built in de python que me ayudó a realizar este ejercicio.
 Sin embargo tengan por seguro que me puedo adaptar sin ningún problema a patrones en específico como ha sucedido en los trabajos que he tenido.
@@ -74,7 +79,7 @@ src/
     * `__init__.py`: Archivo de inicialización del modulo.
     * `api.py`: Archivo donde está el core del proyecto como definición del método http a usar, endpoint, etc
     * `auth.py`: Archivo donde se concentra la parte de validar credenciales y obtener los usuarios que tienen acceso a la API, incluyendo la parte de obtener las credenciales enviadas en la petición como de igual manera obtener los usuarios para comparar si si pueden interactuar con la bd o no.
-  * `queries`: Es la carpeta donde está la lógica para hacer los queries que se necesitan para poder traer la información necesaria al usuario incluyendo los filtros de ser el caso.
+  * `queries`: Sería lo proporcional a una carpeta repositories pero es la carpeta donde está la lógica para hacer los queries que se necesitan para poder traer la información necesaria al usuario incluyendo los filtros de ser el caso.
     * `__init__.py`: Archivo de inicialización del modulo.
     * `database.py`: Archivo que contiene la manera de crear las conexiones a la bd y de igual manera para poder ejecutar los queries que son necesarios para obtener las propiedades que se necesitan.
 
@@ -96,7 +101,7 @@ requirements.txt
 ```
 
 Con la forma anterior tenemos que:
-* `some_project_library`: 
+* `some_project_library`: En caso de que se quiera crear bilbiotecas especificas del proyecto deben de estar a esta altura.
 * `app/`: 
   * `__init__.py`: Archivo de inicialización del proyecto mismo que nos ayudaría a definir nuestros objetos de conexiones a bases de datos etc para poder realizar en otra parte queries. En este caso aquí se definirían los objetos para crear el objeto de conexión a la bd, el objeto para obtener las credenciales de un secret manager, archivo, el objeto de flask, el de la conexión a la bd, etc. Básicamente crear todos los objetos que necesitan ser creados una sola vez para que se puedan importar a través de todo el proyecto sin necesidad de crear un nuevo objeto cada vez que se necesite y así se pueda importar y usar en otros módulos/archivos del API.
   * `admin_routes.py`: Aquí se podrían definir los endpoints que solo sean accesibles por el administrador y que a través de roles por ejemplo se puedan definir incluso niveles de administrador y así definir mejor si se tiene acceso o no a un endpoint en específico a pesar de ser administrador.
@@ -128,10 +133,84 @@ requirements.txt
 ## Aditamentos
 Esto es para explicar lo que agregué que no se pedía en el PDF:
 * `github action`: Para ejecutar un pylint en cada push para así apegarnos a pylint y crear código más estandarizado.
-* `dockerfile`: Para ejecutar el API como si fuera un microservicio, estas instrucciones vendrán más adelante.
-* `basic auth`: Se agregó basic auth al API.
+* `dockerfile`: Para ejecutar el API como si fuera un microservicio.
+* `basic auth`: Se agregó basic auth al API usando un usuario de la tabla de auth_user.
 * `Logs`: Se agregó una forma de crear logs a través de un archivo.
 
-### Uso del dockerfile
+## Ejecutar el código
+El proyecto no necesita correrse desde un contenedor pero deje la opción en caso de que se desee hacer de esa manera.
+Se necesita instalar las bibliotecas pertinentes, use el archivo `requirements.txt` para instalar las bibliotecas externas a través del siguiente comando:
+```
+pip install -r requirements.txt
+```
 
-## Requisito opcional de usuario pueda dar me gusta a propiedades
+### Ejecucion local
+Se debe ir hasta la carpeta src dentro del presente proyecto y una vez dentro del proyecto se ejecuta lo siguiente:
+```
+python main.py
+```
+Y está todo listo para ser consumido, las instrucciones de uso puede encontrarlas [aqui](#Instrucciones-de-uso-del-api)
+### Ejecucion usando dockerfile
+1. Primero se crea la imagen con el siguiente comando y claramente estando en el directorio donde está el mismo Dockerfile:
+```
+docker build -t tuhabi:v1 -f Dockerfile .
+```
+
+2. Después de que termine la ejecución de ese comando aparecerá algo como esto:
+```terminal
+CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS      NAMES
+3525c4sdf1   tuhabi:v1   "python3 ./main.py"   3 seconds ago   Up 2 seconds   5000/tcp   recursing_engelbart
+```
+
+3. Se toma el ID de la imagen para ejecutar el siguiente comando:
+```
+docker run 3525c4sdf1
+```
+
+Y esto levantará el contenedor con la imagen designada desde el Dockerfile
+
+
+## Instrucciones de uso del api
+A continuación la forma de hacer el request al API:
+* Método HTTP: `GET`
+* URL: `{base_url}/properties`
+* Request: Se debe hacer a través de params, un ejemplo a continuación: `{base_url}/properties?year=2019&city=pereira&status=vendido`
+Así mismo se puede filtrar por cualquiera de esos parámetros de forma individual, es decir que solo se mande uno o dos o los tres parámetros juntos que era los criterios de filtración por parte del usuario según el problema a resolver. De igual manera tome en cuenta la opción en caso de que enviara sin filtros el request en el cual si lo hace de esa manera le mostrará todos los registros siempre y cuando estén en el status de `pre_venta`, `en_venta` o `vendido` acorde a las limitaciones mismas del problema planteado.
+* Params: Los params a enviar deben tener el nombre designado debajo y el valor que haya en la base de datos, de lo contrario si no hay ningún registro con esas especificaciones respondera al API con un status de error y como mensaje `No records found`.
+    * `year`: Nombre del campo debe ser igual y se debe mandar los 4 dígitos del año.
+    * `city`: Nombre del campo debe ser igual y se debe mandar el nombre de la ciudad.
+    * `status`: Nombre del campo debe ser igual y se debe mandar el status.
+* `Authorization`: Este es un header que se debe de mandar con las reglas del basic auth de la forma: `Basic username:passwd` y la cadena anterior despues de Basic debe ir codificado en base 64.
+
+Finalmente como parte de este ejercicio si desean probar por ejemplo usando postman les dejo el archivo json para que puedan importar la colección que usé para probar mi API: [click aqui](./tuhabi.postman_collection.json)
+
+
+## Requisito opcional 2 de usuario pueda dar me gusta a propiedades
+Considero que para hacer esto posible lo que se debe de hacer es crear una tabla con un nombre descriptivo como podría ser `liked_properties` tal vez, en donde se deben guardar 2 llaves foraneas que serían el `id` de la tabla `auth_user` que se guardaría como `id_user` dentro de la nueva tabla, el `id` de la tabla `property` que serçia guardado en la nueva tabla tal vez como `id_property` y un timestamp como para saber en caso de que sea necesario cuando el usuario le dio `like` a esa tabla. Debido a que veo que en algunos campos de fecha se pone por ejemplo en la tabla de `auth_user` un campo como `date_joined` yo creare mi campo de date para la tabla de propiedades con me gusta un campo llamado `date_liked`. Los comandos para crear esa tabla sería:
+
+Primero insertamos la tabla, los int 11 es porque veo que el id de las tablas de la bd de tuhabi dicen que son int 11 y por eso los coloco de igual manera así:
+```sql
+CREATE TABLE properties_liked_by  (id_user int(11) NOT NULL, id_property int(11) NOT NULL,
+  date_liked datetime,
+  FOREIGN KEY (id_user) REFERENCES auth_user (id),
+  FOREIGN KEY (id_property) REFERENCES property (id)
+);
+```
+
+Con el comando anterior quedaría la tabla completa y lista para usarse y expandir el modelo actual para ahora si soportar esta funcionalidad.
+Ahora bien como en el ejercicio se dice por el lado práctico que no se use ORM para ver la sintaxis de SQL colocaré a continuación cómo se harían nuevas inserciones en esta nueva tabla:
+
+Primero el insert sería:
+```sql
+INSERT INTO liked_properties (id_user, id_property, date_liked) VALUES (<id_user>, <id_property>, NOW());
+```
+
+Ahora para obtener las propiedades con me gusta por un usuario en específico:
+```sql
+SELECT id_property FROM liked_properties WHERE id_user = <id_user>
+```
+
+Para obtener el nombre completo de los usuarios que le dieron like a algo:
+```sql
+SELECT Au.firstname, Au.last_name FROM auth_user Au LEFT JOIN liked_properties LP ON Au.id=LP.id_user;
+```

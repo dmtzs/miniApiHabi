@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "9a47ebc1-6e8c-4726-9061-0399224d54c2",
+		"name": "tuhabi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6293891"
+	},
+	"item": [
+		{
+			"name": "properties",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{passwd_habi}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{user_habi}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Personal",
+						"value": "eder",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/properties?year=2019&city=pereira&status=vendido",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"properties"
+					],
+					"query": [
+						{
+							"key": "year",
+							"value": "2019"
+						},
+						{
+							"key": "city",
+							"value": "pereira"
+						},
+						{
+							"key": "status",
+							"value": "vendido"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "tuhabi Copy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Personal",
+								"value": "eder",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/properties?build_year=2019&city=pereira&status=pre_venta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"properties"
+							],
+							"query": [
+								{
+									"key": "build_year",
+									"value": "2019"
+								},
+								{
+									"key": "city",
+									"value": "pereira"
+								},
+								{
+									"key": "status",
+									"value": "pre_venta"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "SimpleHTTP/0.6 Python/3.10.5"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 28 Aug 2022 01:15:44 GMT"
+						},
+						{
+							"key": "Content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"properties\": [\n        \"eder\"\n    ]\n}"
+				}
+			]
+		}
+	]
+}

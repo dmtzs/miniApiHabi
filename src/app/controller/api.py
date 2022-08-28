@@ -46,27 +46,30 @@ class MyHandler(http.server.SimpleHTTPRequestHandler, Authorization):
                     endpoint = endpoint_params[0]
 
                     if endpoint == "/properties":
-                        params = endpoint_params[1]
-
-                        if "&" not in params:
-                            params = params.split("=")
-                            params = {
-                                params[0]: params[1]
-                            }
-
-                        elif "&" in params:
-                            all_params = params.split("&")
+                        if len(endpoint_params) < 2:
                             params = {}
-                            for single_param in all_params:
-                                key, value = single_param.split("=")
-                                params[key] = value
-
                         else:
-                            self.error_response("Bad request", 400)
+                            params = endpoint_params[1]
+
+                            if "&" not in params:
+                                params = params.split("=")
+                                params = {
+                                    params[0]: params[1]
+                                }
+
+                            elif "&" in params:
+                                all_params = params.split("&")
+                                params = {}
+                                for single_param in all_params:
+                                    key, value = single_param.split("=")
+                                    params[key] = value
+
+                            else:
+                                self.error_response("Bad request", 400)
 
                         properties = self.get_properties(params)
                         if len(properties) == 0:
-                            self.error_response("Not found", 404)
+                            self.error_response("No records found", 404)
 
                         else:
                             output_data = {
