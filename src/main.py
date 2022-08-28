@@ -4,7 +4,7 @@ try:
 except ImportError as eImp:
     print(f"The following import error ocurred: {eImp}")
 
-PORT = 5000
+PORT = 5000 # Port to serve API
 
 if __name__ == "__main__":
     try:
