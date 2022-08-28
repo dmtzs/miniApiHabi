@@ -139,7 +139,7 @@ requirements.txt
 
 ## Aditamentos
 Esto es para explicar lo que agregué que no se pedía en el PDF:
-* `github action`: Para ejecutar un pylint en cada push para así apegarnos a pylint y crear código más estandarizado.
+* `github action`: Para ejecutar un pylint en cada push para así apegarnos a pylint y crear código más estandarizado, por favor revisen la pestaña de actions una vez en el repositorio para que vean cuando me esquivoque y cuando lo corregí.
 * `dockerfile`: Para ejecutar el API como si fuera un microservicio.
 * `basic auth`: Se agregó basic auth al API usando un usuario de la tabla de auth_user.
 * `logs`: Se agregó una forma de crear logs a través de un archivo.
