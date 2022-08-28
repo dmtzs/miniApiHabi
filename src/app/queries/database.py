@@ -33,7 +33,7 @@ class MySql():
         try:
             connection = self.db_connection()
             if type(connection).__name__ == "str":
-                return "error_username", "error_passwd"
+                raise Exception("Error in trying connection to database")
         except Exception as ex:
             # error_payload = {
             #     "errorDesc": "Error trying to connect to database",
