@@ -1,5 +1,6 @@
 try:
     import pymysql
+    from app import logger
 except ImportError as eImp:
     print(f"The following import error ocurred in {__file__}: {eImp}")
 
@@ -20,25 +21,20 @@ class MySql():
                                             password=self.db_credentials["passwd"],
                                             database=self.db_credentials["dbName"],
                                             cursorclass=pymysql.cursors.DictCursor)
-            print("Connection successful")# log
+            logger.info("Username and password successfully decoded from basic auth")
             return connection
         except Exception as ex:
-            # error_payload = {
-            #     "errorDesc": "Error trying to connect to database",
-            #     "errorTraceback": f"{ex}"
-            # }
+            logger.error("Failed doing the connection to db", extra={"error": f"{ex}"})
             return "connection_error"
     
     def get_properties(self, params):
         try:
+            logger.info("Creating db connection to get properties")
             connection = self.db_connection()
             if type(connection).__name__ == "str":
-                raise Exception("Error in trying connection to database")
+                raise Exception("Error in trying to use connection to database")
         except Exception as ex:
-            # error_payload = {
-            #     "errorDesc": "Error trying to connect to database",
-            #     "errorTraceback": f"{ex}"
-            # }
+            logger.error("Failed to create the db connection", extra={"error": f"{ex}"})
             return []
         
         try:
@@ -57,8 +53,5 @@ class MySql():
 
                     return result
         except Exception as ex:
-            # error_payload = {
-            #     "errorDesc": "Error trying to execute the query",
-            #     "errorTraceback": f"{ex}"
-            # }
+            logger.error("Failed retrieving properties", extra={"error": f"{ex}"})
             return []

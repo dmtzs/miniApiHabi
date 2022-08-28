@@ -1,5 +1,6 @@
 try:
     import base64
+    from app import logger
     from ..queries.database import MySql
 except ImportError as eImp:
     print(f"The following import error ocurred in {__file__}: {eImp}")
@@ -13,24 +14,21 @@ class Authorization(MySql):
             decoded_creds = messsage_bytes.decode("ascii")
             username, passwd = decoded_creds.split(":")
 
+            logger.info("Username and password successfully decoded from basic auth")
             return username, passwd
         except Exception as ex:
-            # error_payload = {
-            #     "errorDesc": "Error trying to decode basic auth credentials",
-            #     "errorTraceback": f"{ex}"
-            # }
+            logger.error("Failed to retrieving usaername and/or password from basic auth", extra={"error": f"{ex}"})
             return "error_username", "error_passwd"
     
     def get_username_passwd_db(self, main_user) -> str:
         try:
+            logger.info("Creating db connection to get user and password")
             connection = self.db_connection()
+
             if type(connection).__name__ == "str":
-                return "error_username", "error_passwd"
+                raise Exception("Error in trying to use connection to database")
         except Exception as ex:
-            # error_payload = {
-            #     "errorDesc": "Error trying to connect to database",
-            #     "errorTraceback": f"{ex}"
-            # }
+            logger.error("Failed to create the db connection", extra={"error": f"{ex}"})
             return "error_username", "error_passwd"
         
         try:
@@ -42,10 +40,8 @@ class Authorization(MySql):
                     if result is None:
                         raise Exception("Could not found any record")
 
+                    logger.info("Username and password successfully retrieved")
                     return result["username"], result["password"]
         except Exception as ex:
-            # error_payload = {
-            #     "errorDesc": "Error trying to execute the query",
-            #     "errorTraceback": f"{ex}"
-            # }
+            logger.error("Failed to retrieving username and/or password", extra={"error": f"{ex}"})
             return "error_username", "error_passwd"
