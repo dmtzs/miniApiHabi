@@ -18,10 +18,16 @@
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/dmtzs/miniApiHabi">
 </p>
 
-- [Documentation](#Documentation)
-- [Supported versions for releases](#Supported-versions-for-releases)
-- [API](#API)
-  - [Specifications](#Specifications)
+- [Ejercicio 1](#Ejercicio-1)
+  - [Explicacion de lo que se realizara](#Explicación-de-lo-que-se-realizará)
+  - [Estructura del proyecto](#Estructura-del-proyecto)
+  - [Propuesta teórica con framework](#Propuesta-teórica-con-framework)
+  - [Aditamentos](#Aditamentos)
+  - [Ejecutar el código](#Ejecutar-el-código)
+  - [Ejecucion local](#Ejecucion-local)
+  - [Ejecucion usando dockerfile](#Ejecucion-usando-dockerfile)
+  - [Instrucciones de uso del api](#Instrucciones-de-uso-del-api)
+- [Ejercicio 2 de usuario pueda dar me gusta a propiedades](#Ejercicio-2-de-usuario-pueda-dar-me-gusta-a-propiedades)
 
 # NOTA
 He notado que a veces la conexión a la bd se tarda de más y se da un timeout, no se a que se deba eso pero de igual manera me pasaba si intentaba conectarme con dbeaver cuando estaba analizando las tablas que hay creadas.
@@ -136,7 +142,7 @@ Esto es para explicar lo que agregué que no se pedía en el PDF:
 * `github action`: Para ejecutar un pylint en cada push para así apegarnos a pylint y crear código más estandarizado.
 * `dockerfile`: Para ejecutar el API como si fuera un microservicio.
 * `basic auth`: Se agregó basic auth al API usando un usuario de la tabla de auth_user.
-* `Logs`: Se agregó una forma de crear logs a través de un archivo.
+* `logs`: Se agregó una forma de crear logs a través de un archivo.
 
 ## Ejecutar el código
 El proyecto no necesita correrse desde un contenedor pero deje la opción en caso de que se desee hacer de esa manera.
