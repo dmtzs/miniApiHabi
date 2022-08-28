@@ -28,7 +28,7 @@ class Authorization(MySql):
             if type(connection).__name__ == "str":
                 raise Exception("Error in trying to use connection to database")
         except Exception as ex:
-            logger.error("Failed to create the db connection", extra={"error": f"{ex}"})
+            logger.error("Failed to create the database connection", extra={"error": f"{ex}"})
             return "error_username", "error_passwd"
         
         try:
