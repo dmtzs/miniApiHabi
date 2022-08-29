@@ -81,7 +81,7 @@ src/
 * `main.py`: En este archivo tenemos la ejecución de nuestro servidor http en la que estará al escucha de recibir peticiones desde postman por ejemplo para así poder de manera exitosa concentrar la ejecución de nuestra API de forma centralizada y de igual manera este archivo será el de ejecución para empezar a escuchar las peticiones http hacia nuestro servidor.
 * `requirements.txt`: Las bibliotecas externas usadas para con el proyecto, en este caso la biblioteca que nos ayuda en la parte de crear un archivo de logs y pra ejecutar queries de SQL en la bd.
 * `app`: Carpeta donde estará la lógica completa de la aplicación.
-* `__init__.py`: Inicialización de objeto de logs para usarse en todo el proyecto así como para la carpeta de app.
+* `__init__.py`: Inicialización de objeto de logs para usarse en todo el proyecto así como para la carpeta de app y de igual manera para inicializar la variable de db_credentials para así poder usar las credenciales de la bd en otras partes del código que la requieran.
   * `controller`: Carpeta donde está la lógica para poder procesar y validar si se llamó al endpoint correcto, si se recibió los parámetros que se deben de estar recibiendo o no, etc. Básicamente es el core del proyecto debido a la manera en la que se debe de desarrollar el API usando la biblioteca built in que opte por usar.
     * `__init__.py`: Archivo de inicialización del modulo.
     * `api.py`: Archivo donde está el core del proyecto como definición del método http a usar, endpoint, etc

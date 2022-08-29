@@ -45,9 +45,9 @@ class MySql():
                     if len(keys) != 0:
                         sql += " WHERE "
 
-                        for i, key in enumerate(keys):
+                        for index, key in enumerate(keys):
                             my_filter = f"{key}='{params[key]}'"
-                            if len(keys) > 1 and i < len(keys)-1:
+                            if len(keys) > 1 and index < len(keys)-1:
                                 sql += my_filter + " AND "
                             else:
                                 sql += my_filter
