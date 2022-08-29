@@ -1,15 +1,12 @@
-#Deriving the latest base image
-FROM python:3.9.13-alpine3.16
+FROM python:3.9
 
 WORKDIR /usr/src
 
-#to COPY the remote file at working directory in container
-COPY ./src /usr/src
-# Now the structure looks like this '/my_server.py'
+COPY ./src/ /usr/
+COPY ./requirements.txt /usr/src
+
+RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 5000
 
-#CMD instruction should be used to run the software
-#contained by your image, along with any arguments.
-
-CMD [ "python3", "./main.py"]
+CMD [ "python", "./main.py"]

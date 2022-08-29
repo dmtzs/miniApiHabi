@@ -230,5 +230,4 @@ SELECT Au.firstname, Au.last_name FROM auth_user Au LEFT JOIN liked_properties L
 # Ejercicio 3 optimizar queries
 Ejercicio opcional.
 
-Para esta parte la verdad creo que con cambiar la manera en la que se guarda el status sería una buena idea debido a que se hacen por lo menos dos JOIN así como lo hice yo para la resolución del ejercicio práctico.
-Por lo que considero que la manera más sencilla es simplemente que el `status` pase a ser parte de la tabla property y de esta manera se hace más sencillo asignar `status` a las propiedades. Por lo que básicamente creo que la manera más sencilla es quitar la tabla de `status_history` y `status` y poner directamente el status en la tabla de `property`.
+Para esta parte la verdad creo que con cambiar la manera en la que se guarda el status sería suficiente, quiero decir, eliminaría la tabla de `status_history` y en la tabla de `property` colocaría el id del status directamente, de esta forma elimino el JOIN de la tabla de `status_history` y solo así dejo un JOIN a hacer para traer la información en cuanto al nombre del status como tal.
