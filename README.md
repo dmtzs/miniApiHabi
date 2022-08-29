@@ -192,7 +192,7 @@ Así mismo se puede filtrar por cualquiera de esos parámetros de forma individu
 
 Finalmente como parte de este ejercicio si desean probar por ejemplo usando postman les dejo el archivo json para que puedan importar la colección que usé para probar mi API: [click aqui](./tuhabi.postman_collection.json)
 
-NOTA: La colección de postman incluye las respuestas que recibí con los filtros aplicados a través de los ejemplos que salen una vez importada la colección.
+NOTA: La colección de postman incluye las respuestas que recibí con los filtros aplicados a través de los ejemplos que salen una vez importada la colección. De igual manera en la parte de postman de authorization se debe cambiar nada más a un usuario que tenga una contraseña dentro de la tabla `auth_user` para probar con éxito desde la colección de postman compartida, esto porque sete variables de entorno para guardar ahí las credenciales.
 
 
 # Ejercicio 2 de usuario pueda dar me gusta a propiedades
