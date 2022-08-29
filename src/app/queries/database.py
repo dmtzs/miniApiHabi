@@ -36,14 +36,14 @@ class MySql():
                     SELECT address, city, price, description, status FROM 
                     (SELECT Pty.address, Pty.city, Pty.price, Pty.description, Pty.year, S.name AS status
                     FROM property Pty
-                    LEFT JOIN status_history SH ON P.id=SH.property_id
+                    LEFT JOIN status_history SH ON Pty.id=SH.property_id
                     LEFT JOIN status S ON SH.status_id=S.id
                     WHERE (S.name='pre_venta' OR S.name='vendido' OR S.name='en_venta')) res 
                     """
 
                     keys = list(params.keys())
                     if len(keys) != 0:
-                        sql += " WHERE "
+                        sql += "WHERE "
 
                         for index, key in enumerate(keys):
                             my_filter = f"{key}='{params[key]}'"
@@ -51,7 +51,6 @@ class MySql():
                                 sql += my_filter + " AND "
                             else:
                                 sql += my_filter
-
                     cursor.execute(sql)
                     result = cursor.fetchall()
                     if len(result) == 0:
