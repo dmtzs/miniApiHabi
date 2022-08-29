@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9a47ebc1-6e8c-4726-9061-0399224d54c2",
+		"_postman_id": "07e74bd7-1780-4f72-b5b4-f92f269f7fa1",
 		"name": "tuhabi",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6293891"
@@ -14,12 +14,12 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "{{passwd_habi}}",
+							"value": "testpass123",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "{{user_habi}}",
+							"value": "test_user",
 							"type": "string"
 						}
 					]
@@ -29,11 +29,12 @@
 					{
 						"key": "Personal",
 						"value": "eder",
-						"type": "text"
+						"type": "text",
+						"disabled": true
 					}
 				],
 				"url": {
-					"raw": "http://localhost:5000/properties?year=2019&city=pereira&status=vendido",
+					"raw": "http://localhost:5000/properties",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -45,33 +46,37 @@
 					"query": [
 						{
 							"key": "year",
-							"value": "2019"
+							"value": "2019",
+							"disabled": true
 						},
 						{
 							"key": "city",
-							"value": "pereira"
+							"value": "pereira",
+							"disabled": true
 						},
 						{
 							"key": "status",
-							"value": "vendido"
+							"value": "vendido",
+							"disabled": true
 						}
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "tuhabi Copy",
+					"name": "properties 1 param",
 					"originalRequest": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Personal",
 								"value": "eder",
-								"type": "text"
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/properties?build_year=2019&city=pereira&status=pre_venta",
+							"raw": "http://localhost:5000/properties?year=2019",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -82,16 +87,18 @@
 							],
 							"query": [
 								{
-									"key": "build_year",
+									"key": "year",
 									"value": "2019"
 								},
 								{
 									"key": "city",
-									"value": "pereira"
+									"value": "pereira",
+									"disabled": true
 								},
 								{
 									"key": "status",
-									"value": "pre_venta"
+									"value": "vendido",
+									"disabled": true
 								}
 							]
 						}
@@ -106,7 +113,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Sun, 28 Aug 2022 01:15:44 GMT"
+							"value": "Mon, 29 Aug 2022 02:22:13 GMT"
 						},
 						{
 							"key": "Content-type",
@@ -114,7 +121,185 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"properties\": [\n        \"eder\"\n    ]\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"properties\": [\n        {\n            \"address\": \"Cll 1A #11B-20\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"Cll 1A #11B-20b\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"Cll 1A #11B-234\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"pre_venta\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "properties 2 params",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Personal",
+								"value": "eder",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/properties?year=2019&status=vendido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"properties"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "2019"
+								},
+								{
+									"key": "city",
+									"value": "pereira",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "vendido"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "SimpleHTTP/0.6 Python/3.10.5"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 29 Aug 2022 02:23:52 GMT"
+						},
+						{
+							"key": "Content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"properties\": [\n        {\n            \"address\": \"Cll 1A #11B-20\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"Cll 1A #11B-20b\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"vendido\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "properties 3 params",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Personal",
+								"value": "eder",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/properties?year=2019&city=pereira&status=vendido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"properties"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "2019"
+								},
+								{
+									"key": "city",
+									"value": "pereira"
+								},
+								{
+									"key": "status",
+									"value": "vendido"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "SimpleHTTP/0.6 Python/3.10.5"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 29 Aug 2022 02:24:43 GMT"
+						},
+						{
+							"key": "Content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"properties\": [\n        {\n            \"address\": \"Cll 1A #11B-20\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"Cll 1A #11B-20b\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"vendido\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "properties no params",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Personal",
+								"value": "eder",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/properties",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"properties"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "2019",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "pereira",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "vendido",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "SimpleHTTP/0.6 Python/3.10.5"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 29 Aug 2022 02:25:16 GMT"
+						},
+						{
+							"key": "Content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"properties\": [\n        {\n            \"address\": \"carrera 100 #15-90\",\n            \"city\": \"bogota\",\n            \"price\": 350000000,\n            \"description\": \"Amplio apartamento en conjunto cerrado\",\n            \"status\": \"en_venta\"\n        },\n        {\n            \"address\": \"diagonal 23 #28-21\",\n            \"city\": \"bogota\",\n            \"price\": 270000000,\n            \"description\": \"Apartamento con hermosas vistas\",\n            \"status\": \"en_venta\"\n        },\n        {\n            \"address\": \"carrera 100 #15-90\",\n            \"city\": \"medellin\",\n            \"price\": 325000000,\n            \"description\": \"Amplio apartamento en conjunto cerrado\",\n            \"status\": \"en_venta\"\n        },\n        {\n            \"address\": \"diagonal 23 #28-21\",\n            \"city\": \"medellin\",\n            \"price\": 270000000,\n            \"description\": \"\",\n            \"status\": \"en_venta\"\n        },\n        {\n            \"address\": \"Malabar entrada 2\",\n            \"city\": \"pereira\",\n            \"price\": 350000000,\n            \"description\": \"Casa campestre con hermosos paisajes\",\n            \"status\": \"en_venta\"\n        },\n        {\n            \"address\": \"Maracay casa 24\",\n            \"city\": \"pereira\",\n            \"price\": 450000000,\n            \"description\": \"Casa campestre con sala de lujo tecnologica\",\n            \"status\": \"en_venta\"\n        },\n        {\n            \"address\": \"diagonal 23 #28-21e\",\n            \"city\": \"bogota\",\n            \"price\": 270000000,\n            \"description\": \"Apartamento con hermosas vistas\",\n            \"status\": \"en_venta\"\n        },\n        {\n            \"address\": \"carrera 100 #15-90e\",\n            \"city\": \"medellin\",\n            \"price\": 325000000,\n            \"description\": \"Amplio apartamento en conjunto cerrado\",\n            \"status\": \"en_venta\"\n        },\n        {\n            \"address\": \"Entrada 8 via cerritos\",\n            \"city\": \"pereira\",\n            \"price\": 250000000,\n            \"description\": \"Full casa amoblada\",\n            \"status\": \"en_venta\"\n        },\n        {\n            \"address\": \"Cll 1A #11B\",\n            \"city\": \"bucaramanga\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"en_venta\"\n        },\n        {\n            \"address\": \"calle 23 #45-67\",\n            \"city\": \"bogota\",\n            \"price\": 120000000,\n            \"description\": \"Hermoso apartamento en el centro de la ciudad\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"carrera 100 #15-90\",\n            \"city\": \"bogota\",\n            \"price\": 350000000,\n            \"description\": \"Amplio apartamento en conjunto cerrado\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"diagonal 23 #28-21\",\n            \"city\": \"bogota\",\n            \"price\": 270000000,\n            \"description\": \"Apartamento con hermosas vistas\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"calle 23 #45-67\",\n            \"city\": \"medellin\",\n            \"price\": 210000000,\n            \"description\": \"\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"carrera 100 #15-90\",\n            \"city\": \"medellin\",\n            \"price\": 325000000,\n            \"description\": \"Amplio apartamento en conjunto cerrado\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"diagonal 23 #28-21\",\n            \"city\": \"medellin\",\n            \"price\": 270000000,\n            \"description\": \"\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"carrera 100 #15-90\",\n            \"city\": \"barranquilla\",\n            \"price\": 35000000,\n            \"description\": null,\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"calle 95 # 78 - 49\",\n            \"city\": \"bogota\",\n            \"price\": 120000000,\n            \"description\": \"hermoso acabado, listo para estrenar\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Entrada 3 via cerritos\",\n            \"city\": \"pereira\",\n            \"price\": 250000000,\n            \"description\": \"Full casa amoblada\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Entrada 2 via cerritos\",\n            \"city\": \"pereira\",\n            \"price\": 270000000,\n            \"description\": \"Casa campestre con lago\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"M1 C5 Panorama\",\n            \"city\": \"dosquebradas\",\n            \"price\": 290000000,\n            \"description\": \"Casa con entrada al centro comercial\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Bloque 5 C26 Umbras\",\n            \"city\": \"belen de umbria\",\n            \"price\": 120000000,\n            \"description\": \"Casa con entrada al centro comercial\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"calle 23 #45-67q\",\n            \"city\": \"bogota\",\n            \"price\": 120000000,\n            \"description\": \"Hermoso apartamento en el centro de la ciudad\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"calle 23 #45-67q\",\n            \"city\": \"bogota\",\n            \"price\": 120000000,\n            \"description\": \"Hermoso apartamento en el centro de la ciudad\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"calle 23 #45-67q\",\n            \"city\": \"bogota\",\n            \"price\": 120000000,\n            \"description\": \"Hermoso apartamento en el centro de la ciudad\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"carrera 100 #15-90w\",\n            \"city\": \"bogota\",\n            \"price\": 350000000,\n            \"description\": \"Amplio apartamento en conjunto cerrado\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"carrera 100 #15-90w\",\n            \"city\": \"bogota\",\n            \"price\": 350000000,\n            \"description\": \"Amplio apartamento en conjunto cerrado\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"carrera 100 #15-90w\",\n            \"city\": \"bogota\",\n            \"price\": 350000000,\n            \"description\": \"Amplio apartamento en conjunto cerrado\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"calle 23 #45-67r\",\n            \"city\": \"medellin\",\n            \"price\": 210000000,\n            \"description\": \"\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"diagonal 23 #28-21s\",\n            \"city\": \"medellin\",\n            \"price\": 270000000,\n            \"description\": \"\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"carrera 22 #34-96v\",\n            \"city\": \"manizales\",\n            \"price\": 39483059,\n            \"description\": null,\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"\",\n            \"city\": \"\",\n            \"price\": 0,\n            \"description\": null,\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"\",\n            \"city\": \"\",\n            \"price\": 0,\n            \"description\": null,\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"\",\n            \"city\": \"\",\n            \"price\": 0,\n            \"description\": null,\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"calle 95 # 78 - 123\",\n            \"city\": \"bogota\",\n            \"price\": 120000000,\n            \"description\": \"hermoso acabado, listo para estrenar\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"calle 18 k 43 - 12e\",\n            \"city\": \"cali\",\n            \"price\": 125000000,\n            \"description\": null,\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Cll 1A #11B-20v\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Malabar entrada 2v\",\n            \"city\": \"pereira\",\n            \"price\": 350000000,\n            \"description\": \"Casa campestre con hermosos paisajes\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Maracay casa 24c\",\n            \"city\": \"pereira\",\n            \"price\": 450000000,\n            \"description\": \"Casa campestre con sala de lujo tecnologica\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Entrada 4 via cerritos\",\n            \"city\": \"pereira\",\n            \"price\": 250000000,\n            \"description\": \"Full casa amoblada\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Entrada 5 via cerritos\",\n            \"city\": \"pereira\",\n            \"price\": 270000000,\n            \"description\": \"Casa campestre con lago\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"M8 C6 Panorama\",\n            \"city\": \"dosquebradas\",\n            \"price\": 290000000,\n            \"description\": \"Casa con entrada al centro comercial\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Bloque 5 C67 Umbras\",\n            \"city\": \"belen de umbria\",\n            \"price\": 120000000,\n            \"description\": \"Casa con entrada al centro comercial\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Cll 1A #11B-234\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Maracay casa 567c\",\n            \"city\": \"pereira\",\n            \"price\": 450000000,\n            \"description\": \"Casa campestre con sala de lujo tecnologica\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Entrada 9 via cerritos\",\n            \"city\": \"pereira\",\n            \"price\": 270000000,\n            \"description\": \"Casa campestre con lago\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Bloque 53 C674 Umbras\",\n            \"city\": \"belen de umbria\",\n            \"price\": 120000000,\n            \"description\": \"Casa con entrada al centro comercial\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"calle 18 k 43\",\n            \"city\": \"cali\",\n            \"price\": 125000000,\n            \"description\": null,\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Cll 1A #20b\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"casa 24c\",\n            \"city\": \"pereira\",\n            \"price\": 450000000,\n            \"description\": \"Casa campestre con sala de lujo tecnologica\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"via cerritos\",\n            \"city\": \"pereira\",\n            \"price\": 250000000,\n            \"description\": \"Full casa amoblada\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"5 via cerritos\",\n            \"city\": \"pereira\",\n            \"price\": 270000000,\n            \"description\": \"Casa campestre con lago\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"C67 Umbras\",\n            \"city\": \"belen de umbria\",\n            \"price\": 120000000,\n            \"description\": \"Casa con entrada al centro comercial\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"Cra 11 A No 18 E 11\",\n            \"city\": \"la virginia\",\n            \"price\": 90000000,\n            \"description\": \"Hermosa casa con 3 piezas\",\n            \"status\": \"pre_venta\"\n        },\n        {\n            \"address\": \"diagonal 23 #28-21\",\n            \"city\": \"bogota\",\n            \"price\": 270000000,\n            \"description\": \"Apartamento con hermosas vistas\",\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"diagonal 23 #28-21\",\n            \"city\": \"medellin\",\n            \"price\": 270000000,\n            \"description\": \"\",\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"Cll 1A #11B-20\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"carrera 100 #15-90x\",\n            \"city\": \"barranquilla\",\n            \"price\": 35000000,\n            \"description\": null,\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"\",\n            \"city\": \"\",\n            \"price\": 0,\n            \"description\": null,\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"\",\n            \"city\": \"\",\n            \"price\": 0,\n            \"description\": null,\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"Cll 1A #11B-20b\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"Cll 1A #11B-123\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"Malabar entrada 345\",\n            \"city\": \"pereira\",\n            \"price\": 350000000,\n            \"description\": \"Casa campestre con hermosos paisajes\",\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"M8 C634 Panorama\",\n            \"city\": \"dosquebradas\",\n            \"price\": 290000000,\n            \"description\": \"Casa con entrada al centro comercial\",\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"Cll 1A #11B\",\n            \"city\": \"pereira\",\n            \"price\": 300000000,\n            \"description\": \"hermoso acabado, listo para estrenar super comodo\",\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"Malabar 2v\",\n            \"city\": \"pereira\",\n            \"price\": 350000000,\n            \"description\": \"Casa campestre con hermosos paisajes\",\n            \"status\": \"vendido\"\n        },\n        {\n            \"address\": \"C6 Panorama\",\n            \"city\": \"dosquebradas\",\n            \"price\": 290000000,\n            \"description\": \"Casa con entrada al centro comercial\",\n            \"status\": \"vendido\"\n        }\n    ]\n}"
 				}
 			]
 		}

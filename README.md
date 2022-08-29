@@ -191,6 +191,7 @@ Así mismo se puede filtrar por cualquiera de esos parámetros de forma individu
 * `Authorization`: Este es un header que se debe de mandar con las reglas del basic auth de la forma: `Basic username:passwd` y la cadena anterior despues de Basic debe ir codificado en base 64.
 
 Finalmente como parte de este ejercicio si desean probar por ejemplo usando postman les dejo el archivo json para que puedan importar la colección que usé para probar mi API: [click aqui](./tuhabi.postman_collection.json)
+NOTA: La colección de postman incluye las respuestas que recibí con los filtros aplicados a través de los ejemplos que salen una vez importada la colección.
 
 
 # Ejercicio 2 de usuario pueda dar me gusta a propiedades
