@@ -28,6 +28,7 @@
   - [Ejecucion usando dockerfile](#Ejecucion-usando-dockerfile)
   - [Instrucciones de uso del api](#Instrucciones-de-uso-del-api)
 - [Ejercicio 2 de usuario pueda dar me gusta a propiedades](#Ejercicio-2-de-usuario-pueda-dar-me-gusta-a-propiedades)
+- [Ejercicio 3 optimizar queries](#Ejercicio-3-optimizar-queries)
 
 # NOTA
 He notado que a veces la conexión a la bd se tarda de más y se da un timeout, no se a que se deba eso pero de igual manera me pasaba si intentaba conectarme con dbeaver cuando estaba analizando las tablas que hay creadas.
@@ -223,3 +224,9 @@ Para obtener el nombre completo de los usuarios que le dieron like a algo:
 ```sql
 SELECT Au.firstname, Au.last_name FROM auth_user Au LEFT JOIN liked_properties LP ON Au.id=LP.id_user;
 ```
+
+# Ejercicio 3 optimizar queries
+Ejercicio opcional.
+
+Para esta parte la verdad creo que con cambiar la manera en la que se guarda el status sería una buena idea debido a que se hacen por lo menos dos JOIN así como lo hice yo para la resolución del ejercicio práctico.
+Por lo que considero que la manera más sencilla es simplemente que el `status` pase a ser parte de la tabla property y de esta manera se hace más sencillo asignar `status` a las propiedades. Por lo que básicamente creo que la manera más sencilla es quitar la tabla de `status_history` y `status` y poner directamente el status en la tabla de `property`.
