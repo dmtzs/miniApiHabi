@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "07e74bd7-1780-4f72-b5b4-f92f269f7fa1",
+		"_postman_id": "3e7a5b41-36cf-4095-99da-1e521137fe6f",
 		"name": "tuhabi",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6293891"
@@ -14,12 +14,12 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "testpass123",
+							"value": "{{habi_passwd}}",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "test_user",
+							"value": "{{habi_username}}",
 							"type": "string"
 						}
 					]
