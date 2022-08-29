@@ -193,11 +193,13 @@ Finalmente como parte de este ejercicio si desean probar por ejemplo usando post
 
 
 # Ejercicio 2 de usuario pueda dar me gusta a propiedades
-Considero que para hacer esto posible lo que se debe de hacer es crear una tabla con un nombre descriptivo como podría ser `liked_properties` tal vez, en donde se deben guardar 2 llaves foraneas que serían el `id` de la tabla `auth_user` que se guardaría como `id_user` dentro de la nueva tabla, el `id` de la tabla `property` que serçia guardado en la nueva tabla tal vez como `id_property` y un timestamp como para saber en caso de que sea necesario cuando el usuario le dio `like` a esa tabla. Debido a que veo que en algunos campos de fecha se pone por ejemplo en la tabla de `auth_user` un campo como `date_joined` yo creare mi campo de date para la tabla de propiedades con me gusta un campo llamado `date_liked`. Los comandos para crear esa tabla sería:
+Considero que para hacer esto posible lo que se debe de hacer es crear una tabla con un nombre descriptivo como podría ser `liked_properties` tal vez, en donde se deben guardar 2 llaves foraneas que serían el `id` de la tabla `auth_user` que se guardaría como `id_user` dentro de la nueva tabla, el `id` de la tabla `property` que serçia guardado en la nueva tabla tal vez como `id_property` y un timestamp como para saber en caso de que sea necesario cuando el usuario le dio `like` a esa tabla. Debido a que veo que en algunos campos de fecha se pone por ejemplo en la tabla de `auth_user` un campo como `date_joined` yo creare mi campo de date para la tabla de propiedades con me gusta un campo llamado `date_liked`. Para ver cómo sería el esquema puede verlo dando click [aquí](./db_esquemas/esquema.png)
+
+Los comandos para crear esa tabla sería:
 
 Primero insertamos la tabla, los int 11 es porque veo que el id de las tablas de la bd de tuhabi dicen que son int 11 y por eso los coloco de igual manera así:
 ```sql
-CREATE TABLE properties_liked_by  (id_user int(11) NOT NULL, id_property int(11) NOT NULL,
+CREATE TABLE liked_properties (id_user int(11) NOT NULL, id_property int(11) NOT NULL,
   date_liked datetime,
   FOREIGN KEY (id_user) REFERENCES auth_user (id),
   FOREIGN KEY (id_property) REFERENCES property (id)
